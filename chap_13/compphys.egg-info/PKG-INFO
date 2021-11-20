@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: compphys
+Version: 0.1
+Summary: Effective Computation in Physics
+Home-page: http://www.oreilly.com/
+Author: Scopatz and Huff
+Author-email: koolkatz@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: License :: OSI Approved
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3

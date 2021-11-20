@@ -1,0 +1,5 @@
+This is a sample data file.
+I am a student majoring in physics.
+
+I am doing an experiment on ASEP.
+

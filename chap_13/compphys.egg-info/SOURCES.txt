@@ -1,0 +1,11 @@
+setup.py
+compphys/__init__.py
+compphys/constants.py
+compphys/physics.py
+compphys.egg-info/PKG-INFO
+compphys.egg-info/SOURCES.txt
+compphys.egg-info/dependency_links.txt
+compphys.egg-info/not-zip-safe
+compphys.egg-info/top_level.txt
+compphys/more/__init__.py
+compphys/more/morephysics.py

@@ -1,0 +1,63 @@
+import numpy as np
+from matplotlib import pyplot as plt
+import time
+
+def remove_i(x, i):
+	"""Drops the ith element of an array."""
+	shape = (x.shape[0]-1,) + x.shape[1:]
+	y = np.empty(shape, dtype=float)
+	y[:i] = x[:i]
+	y[i:] = x[i+1:]
+	return y
+
+def a(i, x, G, m):
+	"""The accelaration of the ith mass."""
+	x_i = x[i]
+	x_j = remove_i(x, i)
+	m_j = remove_i(m, i)
+	diff = x_j - x_i
+	mag3 = np.sum(diff**2, axis=1)**1.5
+	result = G*np.sum(diff * (m_j / mag3)[:, np.newaxis], axis=0)
+	return result
+
+def timestep(x0, v0, G, m, dt):
+	"""Computes the next position and velocity for all masses given
+	initial conditions and a time step size."""
+	N = len(x0)
+	x1 = np.empty(x0.shape, dtype=float)
+	v1 = np.empty(v0.shape, dtype=float)
+	for i in range(N):
+		a_i0 = a(i, x0, G, m)
+		v1[i] = a_i0 * dt + v0[i]
+		x1[i] = a_i0 * dt**2 + v0[i] * dt + x0[i]
+	return x1, v1
+
+def initial_cond(N, D):
+	"""Generates initial conditions for N unity masses at rest
+	starting at random positions in D-dimensional space."""
+	x0 = np.random.rand(N, D)
+	v0 = np.zeros((N, D), dtype=float)
+	m = np.ones(N, dtype=float)
+	return x0, v0, m
+
+def simulate(N, D, S, G, dt):
+	x0, v0, m = initial_cond(N, D)
+	for s in range(S):
+		x1, v1 = timestep(x0, v0, G, m, dt)
+		x0, v0 = x1, v1
+	return x0, v0
+
+Ns = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+runtimes = []
+for N in Ns:
+	start = time.time()
+	simulate(N, 3, 300, 1.0, 1.0e-3)
+	stop = time.time()
+	runtimes.append(stop - start)
+
+plt.figure(figsize=(5,5))
+plt.plot(np.array(Ns), np.array(runtimes)/runtimes[0], '.-')
+plt.xlabel('N-haha')
+plt.ylabel('Time (s)')
+plt.title('N-body-performance-runtime-haha')
+plt.savefig('N-body-runtime.png', dpi=600)
