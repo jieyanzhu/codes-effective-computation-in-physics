@@ -1,0 +1,13 @@
+include MANIFEST.in
+include license.txt
+include readme.txt
+include setup.py
+include *.desktop
+include runsnakerun *.png
+
+recursive-include doc *.html
+recursive-include doc *.png
+recursive-include doc *.css
+recursive-exclude . *.gz
+recursive-exclude . *.profile
+recursive-exclude . *.memory
